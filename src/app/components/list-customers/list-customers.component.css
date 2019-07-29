@@ -1,5 +1,10 @@
-.list-group.custom {
+.list-group {
   height: 80%;
   overflow-y: visible;
-  background-color: blue;
+}
+
+.custom-li {
+  margin: 0%;
+  padding: 1%;
+  font-size: .8em;
 }

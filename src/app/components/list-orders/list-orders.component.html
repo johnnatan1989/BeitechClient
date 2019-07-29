@@ -2,23 +2,24 @@
   <table id="orderTable" class="display">
     <thead>
       <tr>
-        <th>Creation Date</th>
-        <th>Order Id</th>
-        <th>Total $</th>
-        <th>Delivery Address</th>
-        <th>Products</th>
+        <th class="custom-thead">Creation Date</th>
+        <th class="custom-thead">Order Id</th>
+        <th class="custom-thead">Total $</th>
+        <th class="custom-thead">Delivery Address</th>
+        <th class="custom-thead">Products</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of orders">
-        <td>{{order.creationDate}}</td>
-        <td>{{order.id}}</td>
-        <td>{{order.total}}</td>
-        <td>{{order.deliveryAddress}}</td>
+        <td class="custom-thead">{{order.creationDate}}</td>
+        <td class="custom-thead">{{order.id}}</td>
+        <td class="custom-thead">{{order.total}}</td>
+        <td class="custom-thead">{{order.deliveryAddress}}</td>
         <td *ngIf="order.ordersDetail.length == 0">--</td>
         <td *ngIf="order.ordersDetail.length>0">
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let ordersDetail of order.ordersDetail">{{ordersDetail.quantity}} x
+            <li class="list-group-item custom-prods" *ngFor="let ordersDetail of order.ordersDetail">
+              {{ordersDetail.quantity}} x
               {{ordersDetail.product_description}}</li>
           </ul>
         </td>
@@ -32,8 +33,8 @@
   </label>
 </div>
 <div *ngIf="isCustomerSelected" class="row">
-  <div class="col-md-8"></div>
-  <div class="col-md-4">
-    <button class="btn btn-small btn-primary" (click)="addOrder()">Agregar</button>
+  <div class="col-md-6"></div>
+  <div class="col-md-6">
+    <button class="btn btn-small btn-primary col-md-12" (click)="addOrder()">Add Order</button>
   </div>
 </div>
