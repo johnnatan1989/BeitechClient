@@ -37,7 +37,7 @@ export class AddOrderComponent implements OnInit {
   async initForm() {
     this.productsForm = new FormGroup({
       orderAddress: new FormControl(undefined, [Validators.required]),
-      totalPrice: new FormControl(0, [Validators.required]),
+      totalPrice: new FormControl(0),
       quantity: new FormControl([Validators.required]),
       selectProd: new FormControl([undefined])
     });

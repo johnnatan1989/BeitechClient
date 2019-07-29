@@ -17,11 +17,12 @@ export class AppComponent implements OnInit {
   @ViewChild('listCustomerChild', { static: true }) listCustomerChild: ListCustomersComponent;
   @ViewChild('addOrderChild', { static: true }) addOrderChild: AddOrderComponent;
   @ViewChild('basicModal', { static: true }) basicModal: ModalDirective;
+  public isValid: boolean = false;
   constructor() {
 
   }
 
-  showAddOrder(customer:Customer){
+  showAddOrder(customer: Customer) {
     console.log(customer.name);
     this.addOrderChild.customer = customer;
     this.addOrderChild.getProductByIdCustomer();
@@ -34,4 +35,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  isReadyToSave(): boolean {
+    if (this.addOrderChild.total > 1 && this.addOrderChild.productsForm.valid) {
+      console.log(this.addOrderChild.total);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  hideModal() {
+    this.addOrderChild.quantity = 0;
+    this.addOrderChild.total = 0;
+    this.basicModal.hide();
+  }
 }
