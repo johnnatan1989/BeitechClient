@@ -24,6 +24,7 @@ export class AddOrderComponent implements OnInit {
   public prodToAdd: any[] = new Array();
   public prodSelected: Product;
   public isValid: boolean = true;
+  public isNoWarn: boolean;
 
   constructor(private formBuilder: FormBuilder,
     private orderService: OrderServiceService,
@@ -45,6 +46,7 @@ export class AddOrderComponent implements OnInit {
 
   addProduct() {
     if ((this.total + Number(this.productsForm.get('quantity').value)) < 6) {
+      this.isNoWarn = false;
       this.total += Number(this.productsForm.get('quantity').value);
       this.totalPrice += this.productsForm.get('quantity').value * this.prodSelected.price;
       this.prodToAdd.push(this.prodSelected);
@@ -53,6 +55,8 @@ export class AddOrderComponent implements OnInit {
         this.products.splice(i, 1);
       }
       this.productsForm.controls["totalPrice"].setValue(this.totalPrice);
+    } else {
+      this.isNoWarn = true;
     }
 
   }
