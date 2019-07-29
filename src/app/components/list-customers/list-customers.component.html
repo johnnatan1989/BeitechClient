@@ -1,0 +1,3 @@
+<div class="list-group">
+    <button type="button" class="list-group-item list-group-item-action" *ngFor="let customer of customers" (click)="getOrderById($event,customer)">{{customer.name}}</button>
+</div>
