@@ -1,33 +1,39 @@
-<div class="container">
-<table id="orderTable" class="display">
+<div *ngIf="isCustomerSelected" class="container">
+  <table id="orderTable" class="display">
     <thead>
-        <tr>
-            <th>Creation Date</th>
-            <th>Order Id</th>
-            <th>Total $</th>
-            <th>Delivery Address</th>
-            <th>Products</th>
-        </tr>
+      <tr>
+        <th>Creation Date</th>
+        <th>Order Id</th>
+        <th>Total $</th>
+        <th>Delivery Address</th>
+        <th>Products</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let order of orders">
-            <td>{{order.creationDate}}</td>
-            <td>{{order.id}}</td>
-            <td>{{order.total}}</td>
-            <td>{{order.deliveryAddress}}</td>
-            <td *ngIf="order.ordersDetail.length == 0">--</td>
-            <td *ngIf="order.ordersDetail.length>0">
-                <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let ordersDetail of order.ordersDetail">{{ordersDetail.quantity}} x {{ordersDetail.product_description}}</li>
-                </ul>
-            </td>
-        </tr>
+      <tr *ngFor="let order of orders">
+        <td>{{order.creationDate}}</td>
+        <td>{{order.id}}</td>
+        <td>{{order.total}}</td>
+        <td>{{order.deliveryAddress}}</td>
+        <td *ngIf="order.ordersDetail.length == 0">--</td>
+        <td *ngIf="order.ordersDetail.length>0">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let ordersDetail of order.ordersDetail">{{ordersDetail.quantity}} x
+              {{ordersDetail.product_description}}</li>
+          </ul>
+        </td>
+      </tr>
     </tbody>
-</table>
+  </table>
 </div>
-<div class="row">
-    <div class="col-md-8"></div>
-    <div class="col-md-4">
-        <button class="btn btn-small btn-primary" (click)="addOrder()">Agregar</button>
-    </div>
+<div *ngIf="!isCustomerSelected" class="container">
+  <label>
+    <strong>Please select one customer</strong>
+  </label>
+</div>
+<div *ngIf="isCustomerSelected" class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-4">
+    <button class="btn btn-small btn-primary" (click)="addOrder()">Agregar</button>
+  </div>
 </div>

@@ -13,10 +13,11 @@ import { OrderDetail } from 'src/app/models/order-detail';
   styleUrls: ['./list-orders.component.css']
 })
 export class ListOrdersComponent implements OnInit {
-  public orders:Order;
-  public ordersDetail:OrderDetail;
+  public orders: Order;
+  public ordersDetail: OrderDetail;
   public dataTable: any;
-  public customerSelected:Customer;
+  public customerSelected: Customer;
+  public isCustomerSelected: boolean = false;
   @Output() public showAddOrder = new EventEmitter<Customer>();
 
   constructor(private orderService: OrderServiceService,
@@ -31,7 +32,7 @@ export class ListOrdersComponent implements OnInit {
     await this.updateTable();
   }
 
-  public addOrder(){
+  public addOrder() {
     this.showAddOrder.emit(this.customerSelected);
   }
 
@@ -56,6 +57,11 @@ export class ListOrdersComponent implements OnInit {
   /*************WEB CLIENT */
   async getOrderByCustomerId(customerId: number) {
     this.orders = await this.orderService.getOrderByIdCustomer(customerId);
+    if (this.orders != undefined) {
+      this.isCustomerSelected = true;
+    } else {
+      this.isCustomerSelected = false;
+    }
   }
 
 }

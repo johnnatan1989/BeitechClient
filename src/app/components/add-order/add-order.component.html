@@ -1,45 +1,45 @@
 <form novalidate>
-    <div [formGroup]="productsForm">
-        <div class="form-row">
-            <div class="col-md-3">
-                <label>Address:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control" formControlName="orderAddress">
-            </div>
-            <div class="col-md-3">
-                <label>Total Price:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" readonly class="form-control" formControlName="totalPrice">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-3">
-                <label>Products:</label>
-            </div>
-            <div class="col-md-3">
-                    <select class="form-control btn btn-sm input-sm btn-primary" formControlName="selectProd"
-                    (ngModelChange)="onProd()" >
-                    <option *ngFor="let prod of products" [ngValue]="prod">
-                      {{prod.name}}
-                    </option>
-                  </select>
-            </div>
-            <div class="col-md-3">
-                <label>Cantidad:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="text"  class="form-control" formControlName="quantity">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
-                <button class="btn btn-sm btn-primary" (click)="addProduct()">Add Product</button>
-            </div>
-        </div>
-
-
+  <div [formGroup]="productsForm">
+    <div class="form-row">
+      <div class="col-md-3">
+        <label>Address:</label>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control" formControlName="orderAddress">
+      </div>
+      <div class="col-md-3">
+        <label>Total Price:</label>
+      </div>
+      <div class="col-md-3">
+        <input type="text" readonly class="form-control" formControlName="totalPrice">
+      </div>
     </div>
+    <div class="form-row">
+      <div class="col-md-3">
+        <label>Products:</label>
+      </div>
+      <div class="col-md-3">
+        <select class="form-control btn btn-sm input-sm btn-primary" formControlName="selectProd"
+          (ngModelChange)="onProd()">
+          <option *ngFor="let prod of products" [ngValue]="prod">
+            {{prod.name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label>Quantity:</label>
+      </div>
+      <div class="col-md-3">
+        <input type="number" class="form-control" formControlName="quantity">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-9"></div>
+      <div class="col-md-3">
+        <button [disabled]="!isValid" class="btn btn-sm btn-primary" (click)="addProduct()">Add Product</button>
+      </div>
+    </div>
+
+
+  </div>
 </form>
