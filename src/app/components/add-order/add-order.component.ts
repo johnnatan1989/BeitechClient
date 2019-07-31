@@ -6,6 +6,7 @@ import { Product } from 'src/app/models/product';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
+import { OrderToSave } from 'src/app/models/order-to-save';
 
 @Component({
   selector: 'app-add-order',
@@ -49,6 +50,7 @@ export class AddOrderComponent implements OnInit {
       this.isNoWarn = false;
       this.total += Number(this.productsForm.get('quantity').value);
       this.totalPrice += this.productsForm.get('quantity').value * this.prodSelected.price;
+      this.prodSelected.quantity = this.productsForm.get('quantity').value;
       this.prodToAdd.push(this.prodSelected);
       var i = this.products.indexOf(this.prodSelected);
       if (i != -1) {
@@ -84,7 +86,17 @@ export class AddOrderComponent implements OnInit {
     this.populateProductTable();
   }
 
-
+  getOrderToSave(): OrderToSave {
+    var order: OrderToSave;
+    order = {
+      customerId: -1,
+      creationDate: String(new Date()),
+      deliveryAddress: String(this.productsForm.get('orderAddress').value),
+      total: this.totalPrice,
+      details: this.prodToAdd
+    }
+    return order;
+  }
 
   /*************WEB CLIENTS **********/
   public async getProductByIdCustomer() {

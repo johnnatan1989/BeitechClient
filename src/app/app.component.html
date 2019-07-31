@@ -30,8 +30,7 @@
           <!--<button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
             (click)="basicModal.hide()" mdbWavesEffect>Close</button> -->
           <button [disabled]="!isReadyToSave()" type="button" mdbBtn color="primary" class="relative waves-light"
-            mdbWavesEffect>Save
-            changes</button>
+            mdbWavesEffect (click)="saveOrder()">Save Order</button>
         </div>
       </div>
     </div>

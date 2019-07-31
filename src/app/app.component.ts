@@ -5,6 +5,8 @@ import { ListCustomersComponent } from './components/list-customers/list-custome
 import { ModalDirective } from 'angular-bootstrap-md';
 import { Order } from './models/order';
 import { AddOrderComponent } from './components/add-order/add-order.component';
+import { OrderToSave } from './models/order-to-save';
+import { SaveOrderService } from './services/save-order.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +19,9 @@ export class AppComponent implements OnInit {
   @ViewChild('listCustomerChild', { static: true }) listCustomerChild: ListCustomersComponent;
   @ViewChild('addOrderChild', { static: true }) addOrderChild: AddOrderComponent;
   @ViewChild('basicModal', { static: true }) basicModal: ModalDirective;
+  public orderToSave: OrderToSave;
   public isValid: boolean = false;
-  constructor() {
+  constructor(private saveOrderService: SaveOrderService) {
 
   }
 
@@ -38,11 +41,21 @@ export class AppComponent implements OnInit {
 
   isReadyToSave(): boolean {
     if (this.addOrderChild.total > 1 && this.addOrderChild.productsForm.valid) {
-      console.log(this.addOrderChild.total);
+      // console.log(this.addOrderChild.total);
       return true;
     } else {
       return false;
     }
+  }
+
+  async saveOrder() {
+    this.orderToSave = this.addOrderChild.getOrderToSave();
+    this.orderToSave.customerId = this.listOrderChild.customerSelected.id;
+    console.log('orederToSave', this.orderToSave);
+    await this.saveOrderService.saveOrder(this.orderToSave);
+    await this.listOrderChild.getOrderByCustomerId(this.listOrderChild.customerSelected.id);
+    await this.listOrderChild.updateTable();
+    this.basicModal.hide();
   }
 
   hideModal() {
